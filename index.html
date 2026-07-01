@@ -1,257 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Davide Musafiri | Content Strategist</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0F0F0E; --offwhite: #F5F3EE; --green: #1D9E75;
-    --green-dark: #0F6E56; --gray: #888780; --light: #E8E6E0;
-    --white: #FFFFFF; --mid: #1E1E1C; --dark-card: #141413;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--offwhite); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(15,15,14,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .nav-logo { font-weight: 500; font-size: 15px; color: var(--offwhite); letter-spacing: 0.02em; }
-  .nav-logo span { color: var(--green); }
-  .nav-cta { background: var(--green); color: var(--white); text-decoration: none; font-size: 13px; font-weight: 500; padding: 0.5rem 1.25rem; border-radius: 4px; transition: background 0.2s; }
-  .nav-cta:hover { background: var(--green-dark); }
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 2rem 5rem; max-width: 820px; margin: 0 auto; }
-  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 1.5rem; }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; line-height: 1.15; color: var(--offwhite); margin-bottom: 1.5rem; }
-  .hero h1 em { font-style: italic; color: var(--green); }
-  .hero-sub { font-size: 1.05rem; color: var(--gray); max-width: 560px; margin-bottom: 2.5rem; line-height: 1.7; }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-  .btn-primary { display: inline-block; background: var(--green); color: var(--white); text-decoration: none; font-size: 14px; font-weight: 500; padding: 0.875rem 2rem; border-radius: 4px; transition: background 0.2s, transform 0.15s; }
-  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
-  .btn-ghost { display: inline-block; color: var(--gray); text-decoration: none; font-size: 14px; padding: 0.875rem 0; transition: color 0.2s; }
-  .btn-ghost:hover { color: var(--offwhite); }
-  .proof-strip { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 3rem 2rem; }
-  .proof-inner { max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; }
-  .proof-item { text-align: center; }
-  .proof-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--offwhite); line-height: 1; margin-bottom: 0.4rem; }
-  .proof-num span { color: var(--green); }
-  .proof-label { font-size: 12px; color: var(--gray); }
-  section { padding: 5rem 2rem; max-width: 820px; margin: 0 auto; }
-  .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--offwhite); margin-bottom: 1rem; line-height: 1.25; }
-  .section-body { font-size: 15px; color: var(--gray); line-height: 1.75; max-width: 560px; }
-  .includes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
-  .include-card { border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 1.25rem 1.5rem; transition: border-color 0.2s; }
-  .include-card:hover { border-color: rgba(29,158,117,0.4); }
-  .include-icon { width: 32px; height: 32px; background: rgba(29,158,117,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.875rem; }
-  .include-icon svg { width: 16px; height: 16px; stroke: var(--green); fill: none; stroke-width: 2; }
-  .include-title { font-size: 14px; font-weight: 500; color: var(--offwhite); margin-bottom: 0.25rem; }
-  .include-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
-  .platforms { display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .platform-tag { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.12); color: var(--gray); }
-  .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
-  .pkg { border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 1.5rem; position: relative; }
-  .pkg.featured { border-color: var(--green); }
-  .pkg-badge { position: absolute; top: -11px; left: 1.5rem; background: var(--green); color: var(--white); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
-  .pkg-name { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.75rem; }
-  .pkg-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 1.25rem; }
-  .pkg-feature { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 13px; color: var(--gray); margin-bottom: 0.5rem; line-height: 1.5; }
-  .pkg-feature-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 7px; }
-  .pkg-missing { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 13px; color: rgba(136,135,128,0.4); margin-bottom: 0.5rem; line-height: 1.5; text-decoration: line-through; }
-  .pkg-missing-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(136,135,128,0.3); flex-shrink: 0; margin-top: 7px; }
-  .addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 2rem; }
-  .addon { border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
-  .addon-icon { width: 36px; height: 36px; background: rgba(29,158,117,0.1); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .addon-icon svg { width: 16px; height: 16px; stroke: var(--green); fill: none; stroke-width: 2; }
-  .addon-name { font-size: 14px; font-weight: 500; color: var(--offwhite); margin-bottom: 2px; }
-  .addon-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
-  .steps { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0; }
-  .step { display: flex; gap: 1.5rem; align-items: flex-start; padding-bottom: 2rem; position: relative; }
-  .step:not(:last-child)::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 0; width: 1px; background: rgba(255,255,255,0.08); }
-  .step-num { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(29,158,117,0.4); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--green); flex-shrink: 0; background: rgba(29,158,117,0.06); }
-  .step-title { font-size: 15px; font-weight: 500; color: var(--offwhite); margin-bottom: 4px; }
-  .step-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
-  .terms-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .term { font-size: 13px; color: var(--gray); display: flex; align-items: center; gap: 0.5rem; }
-  .term-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--green); }
-  .pricing-note { font-size: 13px; color: var(--gray); margin-top: 1.5rem; }
-  .cta-section { padding: 5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
-  .cta-inner { max-width: 560px; margin: 0 auto; }
-  .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; color: var(--offwhite); margin-bottom: 1rem; line-height: 1.2; }
-  .cta-sub { font-size: 15px; color: var(--gray); margin-bottom: 2rem; line-height: 1.7; }
-  .section-divider { height: 1px; background: rgba(255,255,255,0.06); max-width: 820px; margin: 0 auto; }
-  footer { padding: 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
-  footer p { font-size: 12px; color: rgba(136,135,128,0.5); }
-  footer a { color: rgba(136,135,128,0.7); text-decoration: none; }
-  footer a:hover { color: var(--offwhite); }
-  @media (max-width: 600px) { nav { padding: 1rem 1.25rem; } .hero { padding: 7rem 1.25rem 4rem; } section { padding: 4rem 1.25rem; } .proof-strip { padding: 2.5rem 1.25rem; } .cta-section { padding: 4rem 1.25rem; } }
-</style>
-</head>
-<body>
 
-<nav>
-  <div class="nav-logo">Davide <span>Musafiri</span></div>
-  <a href="https://calendly.com/davidemusafiri12/free-15-min-discovery-call" class="nav-cta" target="_blank">Book a free call</a>
-</nav>
+Davide Musafiri
+Helping you make money with your phone — without quitting your job
 
-<div class="hero">
-  <p class="hero-eyebrow">Melbourne & Shepparton · Content Strategy</p>
-  <h1>We make your business <em>impossible to ignore</em> online</h1>
-  <p class="hero-sub">Professional video content for business owners and personal brands — filmed on location, edited and posted every month. You focus on running your business. We handle everything else.</p>
-  <div class="hero-actions">
-    <a href="https://calendly.com/davidemusafiri12/free-15-min-discovery-call" class="btn-primary" target="_blank">Book a free 15-min call</a>
-    <a href="#packages" class="btn-ghost">See packages →</a>
-  </div>
-</div>
+Zero to CEO Bundle
+Four practical guides to get you started
+$30
 
-<div class="proof-strip">
-  <div class="proof-inner">
-    <div class="proof-item"><div class="proof-num">69<span>K</span></div><div class="proof-label">Views in one month</div></div>
-    <div class="proof-item"><div class="proof-num">24<span>K</span></div><div class="proof-label">New accounts reached</div></div>
-    <div class="proof-item"><div class="proof-num">$<span>0</span></div><div class="proof-label">Spent on ads</div></div>
-    <div class="proof-item"><div class="proof-num">74<span>.9%</span></div><div class="proof-label">Views from non-followers</div></div>
-  </div>
-</div>
+The First Client Roadmap
 
-<div class="section-divider"></div>
+The Pricing & Positioning Guide
 
-<section>
-  <p class="section-eyebrow">Who this is for</p>
-  <h2 class="section-title">Built for business owners who do great work but aren't getting seen</h2>
-  <p class="section-body">Business owners and personal brands across Melbourne and Shepparton who are winning clients on word of mouth alone — but losing leads to competitors with a stronger online presence. If your work is elite but your social media isn't, this is for you.</p>
-  <div class="includes-grid">
-    <div class="include-card">
-      <div class="include-icon"><svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg></div>
-      <div class="include-title">On location filming</div>
-      <div class="include-desc">We come to your business with professional equipment. You don't lift a finger.</div>
-    </div>
-    <div class="include-card">
-      <div class="include-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-      <div class="include-title">Editing & captions</div>
-      <div class="include-desc">Every video edited to a cinematic standard with captions written to convert viewers into enquiries.</div>
-    </div>
-    <div class="include-card">
-      <div class="include-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div>
-      <div class="include-title">Posted for you</div>
-      <div class="include-desc">We post to Instagram and Facebook on your behalf. You never need to touch your phone.</div>
-    </div>
-    <div class="include-card">
-      <div class="include-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
-      <div class="include-title">Monthly reporting</div>
-      <div class="include-desc">A clear report every month showing views, reach and what's working so you can see the ROI.</div>
-    </div>
-    <div class="include-card">
-      <div class="include-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
-      <div class="include-title">Content strategy</div>
-      <div class="include-desc">Every video is planned with a purpose — attract clients, build your brand, or grow your reputation.</div>
-    </div>
-    <div class="include-card">
-      <div class="include-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-      <div class="include-title">Brand storytelling</div>
-      <div class="include-desc">Showcase your team, your culture and your story — the most powerful content any business can post.</div>
-    </div>
-  </div>
-  <div class="platforms">
-    <span class="platform-tag">Instagram</span>
-    <span class="platform-tag">Facebook</span>
-    <span class="platform-tag">Melbourne & Shepparton</span>
-  </div>
-</section>
+30 Days of Content, Done For You
 
-<div class="section-divider"></div>
+The Tradie-to-Founder Mindset Guide
+Unlock
+→
 
-<section id="packages">
-  <p class="section-eyebrow">Packages</p>
-  <h2 class="section-title">Simple, transparent pricing</h2>
-  <p class="section-body">Three packages designed for different stages of growth. No lock-in after 3 months. Pricing discussed on your free discovery call.</p>
-  <div class="packages-grid">
-    <div class="pkg">
-      <div class="pkg-name">Foundation</div>
-      <p style="font-size:13px;color:var(--gray);margin-bottom:0.75rem;">For businesses ready to show up online</p>
-      <div class="pkg-divider"></div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>6 cinematic videos per month</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Editing & captions included</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Posted to Instagram & Facebook</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>1 filming day per month</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Monthly performance summary</div>
-      <div class="pkg-missing"><div class="pkg-missing-dot"></div>No content strategy</div>
-      <div class="pkg-missing"><div class="pkg-missing-dot"></div>No brand storytelling</div>
-      <div class="pkg-missing"><div class="pkg-missing-dot"></div>No creative direction</div>
-    </div>
-    <div class="pkg featured">
-      <div class="pkg-badge">Most popular</div>
-      <div class="pkg-name">Growth</div>
-      <p style="font-size:13px;color:var(--gray);margin-bottom:0.75rem;">Best value — double the content for less per video</p>
-      <div class="pkg-divider"></div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>10 cinematic videos per month</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Editing, captions & posting</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Posted to Instagram & Facebook</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Full content strategy & direction</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>2 filming days per month</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Brand storytelling content</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Creative direction included</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Monthly performance report</div>
-    </div>
-    <div class="pkg">
-      <div class="pkg-name">Authority</div>
-      <p style="font-size:13px;color:var(--gray);margin-bottom:0.75rem;">For businesses ready to fully own their space</p>
-      <div class="pkg-divider"></div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>15 cinematic videos per month</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Full social media management</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Content strategy & creative direction</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>3 filming days per month</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Brand showcase series</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Dedicated account manager</div>
-      <div class="pkg-feature"><div class="pkg-feature-dot"></div>Detailed analytics & reporting</div>
-    </div>
-  </div>
-  <p class="pricing-note">Pricing discussed on your free discovery call. 3-month minimum · Monthly retainers · No discounts.</p>
-  <div style="margin-top:2rem;">
-    <p class="section-eyebrow" style="margin-bottom:1rem;">Add-ons — available on any package</p>
-    <div class="addons-grid">
-      <div class="addon">
-        <div class="addon-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <div>
-          <div class="addon-name">Social media management</div>
-          <div class="addon-desc">We handle all comments and DMs on your behalf. You focus on your business.</div>
-        </div>
-      </div>
-      <div class="addon">
-        <div class="addon-icon"><svg viewBox="0 0 24 24"><path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg></div>
-        <div>
-          <div class="addon-name">Paid ads management</div>
-          <div class="addon-desc">We manage your Facebook & Instagram ad campaigns. Ad spend paid separately to Meta.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+Free Discovery Call
+15 minutes — figure out your first move together
+Free
+Book Now
+→
 
-<div class="section-divider"></div>
-
-<section>
-  <p class="section-eyebrow">How it works</p>
-  <h2 class="section-title">From call to content in under 30 days</h2>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div><div class="step-title">Book a free 15-min call</div><div class="step-desc">We learn about your business, your goals and who you want to reach. No pressure, no pitch dump.</div></div></div>
-    <div class="step"><div class="step-num">2</div><div><div class="step-title">We build your content plan</div><div class="step-desc">A strategy tailored to your business, your audience and the clients you want to attract. Delivered within 5 days of signing.</div></div></div>
-    <div class="step"><div class="step-num">3</div><div><div class="step-title">We come to you</div><div class="step-desc">Filming day booked within 2 weeks of signing. We bring everything — you just keep running your business.</div></div></div>
-    <div class="step"><div class="step-num">4</div><div><div class="step-title">Your content goes live</div><div class="step-desc">First video posted within 30 days. We handle editing, captions and posting. You watch your online presence grow.</div></div></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<div class="cta-section">
-  <div class="cta-inner">
-    <h2 class="cta-title">Ready to get your business seen?</h2>
-    <p class="cta-sub">Book a free 15-minute call. We'll show you exactly what we'd do for your business — no obligation, no hard sell.</p>
-    <a href="https://calendly.com/davidemusafiri12/free-15-min-discovery-call" class="btn-primary" target="_blank">Book your free call now</a>
-  </div>
-</div>
-
-<footer>
-  <p>Davide Musafiri · Percent Play Media · Melbourne & Shepparton, VIC · <a href="mailto:davidemusafiri12@gmail.com">davidemusafiri12@gmail.com</a></p>
-</footer>
-
-</body>
-</html>
+Innavara Université
+Group coaching — go from zero to your first client with a real system
+Apply Now
+→
+@davide_musafiri  ·  Instagram
